@@ -4,11 +4,9 @@ import lombok.Data;
 
 /**
  * 路由显示信息
- *
  */
 @Data
-public class MetaVo
-{
+public class MetaVo {
     /**
      * 设置该路由在侧边栏和面包屑中展示的名字
      */
@@ -19,12 +17,10 @@ public class MetaVo
      */
     private String icon;
 
-    public MetaVo()
-    {
+    public MetaVo() {
     }
 
-    public MetaVo(String title, String icon)
-    {
+    public MetaVo(String title, String icon) {
         this.title = title;
         this.icon = icon;
     }
