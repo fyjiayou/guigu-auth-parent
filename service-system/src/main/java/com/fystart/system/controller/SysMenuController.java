@@ -2,6 +2,7 @@ package com.fystart.system.controller;
 
 import com.fystart.common.result.Result;
 import com.fystart.model.system.SysMenu;
+import com.fystart.model.vo.AssginMenuVo;
 import com.fystart.system.service.SysMenuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -50,4 +51,18 @@ public class SysMenuController {
         return Result.ok();
     }
 
+
+    @ApiOperation(httpMethod = "GET",value = "根据角色获取菜单")
+    @GetMapping("/toAssign/{roleId}")
+    public Result toAssign(@PathVariable String roleId){
+        List<SysMenu> menuList = sysMenuService.getRoleMenus(roleId);
+        return Result.ok(menuList);
+    }
+
+    @ApiOperation(httpMethod = "POST",value = "给角色分配菜单")
+    @PostMapping("/doAssign")
+    public Result doAssign(@RequestBody AssginMenuVo assginMenuVo){
+        sysMenuService.doAssign(assginMenuVo);
+        return Result.ok();
+    }
 }

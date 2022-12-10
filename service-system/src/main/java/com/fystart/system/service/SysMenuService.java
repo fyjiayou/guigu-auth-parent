@@ -2,6 +2,7 @@ package com.fystart.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.fystart.model.system.SysMenu;
+import com.fystart.model.vo.AssginMenuVo;
 
 import java.util.List;
 
@@ -24,4 +25,17 @@ public interface SysMenuService extends IService<SysMenu> {
      * @param id
      */
     void removeMenuById(Long id);
+
+    /**
+     * 根据角色获取菜单
+     * @param roleId
+     * @return
+     */
+    List<SysMenu> getRoleMenus(String roleId);
+
+    /**
+     * 给角色分配菜单
+     * @param assginMenuVo
+     */
+    void doAssign(AssginMenuVo assginMenuVo);
 }
