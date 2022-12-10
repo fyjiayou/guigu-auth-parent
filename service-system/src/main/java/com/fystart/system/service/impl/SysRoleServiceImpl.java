@@ -14,6 +14,7 @@ import com.fystart.system.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,9 +43,17 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         queryWrapper.eq(SysUserRole::getUserId,id);
         List<SysUserRole> sysUserRoles = sysUserRoleMapper.selectList(queryWrapper);
 
+        //从sysUserRoles集合获取所有角色id
+        List<String> userRoleIds = new ArrayList<>();
+        for (SysUserRole sysUserRole : sysUserRoles) {
+            userRoleIds.add(sysUserRole.getRoleId());
+        }
+
         Map<String,Object> map = new HashMap<>();
-        map.put("roles",roles);
-        map.put("userRoles",sysUserRoles);
+        //所有角色
+        map.put("allRoles",roles);
+        //用户分配角色id集合
+        map.put("userRoleIds",sysUserRoles);
         return map;
     }
 

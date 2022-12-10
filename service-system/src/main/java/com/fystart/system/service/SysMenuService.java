@@ -3,6 +3,7 @@ package com.fystart.system.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.fystart.model.system.SysMenu;
 import com.fystart.model.vo.AssginMenuVo;
+import com.fystart.model.vo.RouterVo;
 
 import java.util.List;
 
@@ -38,4 +39,8 @@ public interface SysMenuService extends IService<SysMenu> {
      * @param assginMenuVo
      */
     void doAssign(AssginMenuVo assginMenuVo);
+
+    List<RouterVo> getUserMenuList(String id);
+
+    List<String> getUserButtonList(String id);
 }

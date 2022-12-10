@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.fystart.model.system.SysUser;
 import com.fystart.model.vo.SysUserQueryVo;
 
+import java.util.Map;
+
 /**
  * @author fy
  * @date 2022/12/10 15:01
@@ -27,4 +29,13 @@ public interface SysUserService extends IService<SysUser> {
      * @param status
      */
     void updateStatus(String id, Integer status);
+
+    /**
+     * 根据用户名查询数据库
+     * @param username
+     * @return
+     */
+    SysUser getUserInfoByUsername(String username);
+
+    Map<String, Object> getUserInfo(String username);
 }

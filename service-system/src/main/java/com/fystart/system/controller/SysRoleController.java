@@ -46,8 +46,8 @@ public class SysRoleController {
     }
 
     @ApiOperation(value = "获取角色")
-    @GetMapping("/get/{id}")
-    public Result get(@PathVariable Long id) {
+    @GetMapping("/findRoleById/{id}")
+    public Result get(@PathVariable String id) {
         SysRole role = sysRoleService.getById(id);
         return Result.ok(role);
     }
@@ -75,7 +75,7 @@ public class SysRoleController {
 
     @ApiOperation(httpMethod = "DELETE", value = "删除角色")
     @DeleteMapping("/remove/{id}")
-    public Result remove(@PathVariable Long id) {
+    public Result remove(@PathVariable String id) {
         sysRoleService.removeById(id);
         return Result.ok();
     }

@@ -3,6 +3,7 @@ package com.fystart.system.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fystart.common.result.Result;
+import com.fystart.common.utils.MD5;
 import com.fystart.model.system.SysUser;
 import com.fystart.model.vo.SysUserQueryVo;
 import com.fystart.system.service.SysUserService;
@@ -36,15 +37,23 @@ public class SysUserController {
     }
 
     @ApiOperation(httpMethod = "GET", value = "获取用户")
-    @GetMapping("/get/{id}")
-    public Result get(@PathVariable Long id) {
+    @GetMapping("/getUser/{id}")
+    public Result get(@PathVariable String id) {
         SysUser user = sysUserService.getById(id);
         return Result.ok(user);
     }
 
+    /**
+     * 注意：用户密码不能明文存放，需要进行加密
+     *
+     * @param user
+     * @return
+     */
     @ApiOperation(httpMethod = "POST", value = "保存用户")
     @PostMapping("/save")
     public Result save(@RequestBody SysUser user) {
+        String pwd = MD5.encrypt(user.getPassword());
+        user.setPassword(pwd);
         sysUserService.save(user);
         return Result.ok();
     }
@@ -58,15 +67,15 @@ public class SysUserController {
 
     @ApiOperation(httpMethod = "DELETE", value = "删除用户")
     @DeleteMapping("/remove/{id}")
-    public Result remove(@PathVariable Long id) {
+    public Result remove(@PathVariable String id) {
         sysUserService.removeById(id);
         return Result.ok();
     }
 
-    @ApiOperation(httpMethod = "GET",value = "更改用户状态")
+    @ApiOperation(httpMethod = "GET", value = "更改用户状态")
     @GetMapping("/updateStatus/{id}/{status}")
-    public Result updateStatus(@PathVariable String id,@PathVariable Integer status){
-        sysUserService.updateStatus(id,status);
+    public Result updateStatus(@PathVariable String id, @PathVariable Integer status) {
+        sysUserService.updateStatus(id, status);
         return Result.ok();
     }
 }
