@@ -21,4 +21,10 @@ public interface SysUserService extends IService<SysUser> {
      */
     IPage<SysUser> selectPage(Page<SysUser> pageParam, SysUserQueryVo adminQueryVo);
 
+    /**
+     * 更改用户状态
+     * @param id
+     * @param status
+     */
+    void updateStatus(String id, Integer status);
 }

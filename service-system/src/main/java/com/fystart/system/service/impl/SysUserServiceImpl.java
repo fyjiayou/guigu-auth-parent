@@ -28,4 +28,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
         return sysUserMapper.selectPage(pageParam, userQueryVo);
     }
+
+    @Override
+    public void updateStatus(String id, Integer status) {
+        SysUser sysUser = baseMapper.selectById(id);
+        sysUser.setStatus(status);
+        baseMapper.updateById(sysUser);
+    }
 }

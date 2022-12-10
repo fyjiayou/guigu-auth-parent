@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fystart.common.result.Result;
 import com.fystart.model.system.SysRole;
+import com.fystart.model.vo.AssginRoleVo;
 import com.fystart.model.vo.SysRoleQueryVo;
 import com.fystart.system.service.SysRoleService;
 import io.swagger.annotations.Api;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author fy
@@ -90,6 +92,20 @@ public class SysRoleController {
     @DeleteMapping("/batchRemove")
     public Result batchRemove(@RequestBody List<Long> idList) {
         sysRoleService.removeByIds(idList);
+        return Result.ok();
+    }
+
+    @ApiOperation(httpMethod = "GET",value = "根据用户id获取已分配角色和全部角色")
+    @GetMapping("/toAssign/{id}")
+    public Result toAssign(@PathVariable String id){
+        Map<String,Object> map  = sysRoleService.getUserRoles(id);
+        return Result.ok(map);
+    }
+
+    @ApiOperation(httpMethod = "POSt",value = "给用户重新分配角色")
+    @PostMapping("/doAssign")
+    public Result doAssign(@RequestBody AssginRoleVo assginRoleVo){
+        sysRoleService.doAssign(assginRoleVo);
         return Result.ok();
     }
 }
