@@ -17,7 +17,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 import java.util.ArrayList;
 import java.util.List;
 
-//swagger2配置类
+
+/**
+ * swagger2配置类
+ * @author fengyue
+ */
 @Configuration
 @EnableSwagger2WebMvc
 public class Knife4jConfig {
@@ -57,5 +61,4 @@ public class Knife4jConfig {
                 .contact(new Contact("zhangsan", "http://baidu.com", "zhangsan@qq.com"))
                 .build();
     }
-
 }

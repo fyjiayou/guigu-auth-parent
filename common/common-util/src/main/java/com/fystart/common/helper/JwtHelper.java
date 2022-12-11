@@ -95,9 +95,4 @@ public class JwtHelper {
     public static void removeToken(String token) {
 
     }
-
-    public static void main(String[] args) {
-        String admin = JwtHelper.createToken("1", "admin");
-        System.out.println(admin);
-    }
 }

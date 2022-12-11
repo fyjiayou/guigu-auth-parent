@@ -17,6 +17,12 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface SysUserMapper extends BaseMapper<SysUser> {
 
+    /**
+     * 分页条件查询
+     * @param page
+     * @param userQueryVo
+     * @return
+     */
     IPage<SysUser> selectPage(Page<SysUser> page, @Param("vo") SysUserQueryVo userQueryVo);
 
 }

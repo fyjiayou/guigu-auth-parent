@@ -53,7 +53,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         //所有角色
         map.put("allRoles",roles);
         //用户分配角色id集合
-        map.put("userRoleIds",sysUserRoles);
+        map.put("userRoleIds",userRoleIds);
         return map;
     }
 

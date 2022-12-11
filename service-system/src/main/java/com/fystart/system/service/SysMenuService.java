@@ -40,7 +40,17 @@ public interface SysMenuService extends IService<SysMenu> {
      */
     void doAssign(AssginMenuVo assginMenuVo);
 
-    List<RouterVo> getUserMenuList(String id);
+    /**
+     * 根据用户id获取相应的菜单列表
+     * @param userId
+     * @return
+     */
+    List<RouterVo> getUserMenuList(String userId);
 
-    List<String> getUserButtonList(String id);
+    /**
+     * 获取用户按钮权限
+     * @param userId
+     * @return
+     */
+    List<String> getUserButtonList(String userId);
 }

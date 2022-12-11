@@ -168,18 +168,18 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     }
 
     @Override
-    public List<String> getUserButtonList(String id) {
+    public List<String> getUserButtonList(String userId) {
         List<SysMenu> sysMenuList = null;
 
         //admin是超级管理员，操作所有内容
         //如果id = 1，说明是超级管理员，不需要查询了
-        if (id.equals("1")) {
+        if (userId.equals("1")) {
             LambdaQueryWrapper<SysMenu> queryWrap1 = new LambdaQueryWrapper<>();
             queryWrap1.eq(SysMenu::getStatus, 1);
             queryWrap1.orderByAsc(SysMenu::getSortValue);
             sysMenuList = baseMapper.selectList(queryWrap1);
         } else {
-            sysMenuList = baseMapper.findMenuListByUserId(id);
+            sysMenuList = baseMapper.findMenuListByUserId(userId);
         }
 
         //遍历菜单集合
