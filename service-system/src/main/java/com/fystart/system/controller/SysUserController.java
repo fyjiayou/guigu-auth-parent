@@ -11,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -26,6 +27,7 @@ public class SysUserController {
     @Autowired
     private SysUserService sysUserService;
 
+    @PreAuthorize("hasAnyAuthority('bnt.sysUser.list')")
     @ApiOperation(httpMethod = "GET", value = "获取分页列表")
     @GetMapping("/{page}/{limit}")
     public Result index(@ApiParam(name = "page", value = "当前页码", required = true) @PathVariable Long page,
@@ -36,6 +38,7 @@ public class SysUserController {
         return Result.ok(pageModel);
     }
 
+    @PreAuthorize("hasAnyAuthority('bnt.sysUser.list')")
     @ApiOperation(httpMethod = "GET", value = "获取用户")
     @GetMapping("/getUser/{id}")
     public Result get(@PathVariable String id) {
@@ -49,6 +52,7 @@ public class SysUserController {
      * @param user
      * @return
      */
+    @PreAuthorize("hasAnyAuthority('bnt.sysUser.add')")
     @ApiOperation(httpMethod = "POST", value = "保存用户")
     @PostMapping("/save")
     public Result save(@RequestBody SysUser user) {
@@ -58,6 +62,7 @@ public class SysUserController {
         return Result.ok();
     }
 
+    @PreAuthorize("hasAnyAuthority('bnt.sysUser.update')")
     @ApiOperation(httpMethod = "PUT", value = "更新用户")
     @PutMapping("/update")
     public Result updateById(@RequestBody SysUser user) {
@@ -65,6 +70,7 @@ public class SysUserController {
         return Result.ok();
     }
 
+    @PreAuthorize("hasAnyAuthority('bnt.sysUser.remove')")
     @ApiOperation(httpMethod = "DELETE", value = "删除用户")
     @DeleteMapping("/remove/{id}")
     public Result remove(@PathVariable String id) {

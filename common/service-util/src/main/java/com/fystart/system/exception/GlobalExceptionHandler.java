@@ -1,6 +1,8 @@
 package com.fystart.system.exception;
 
 import com.fystart.common.result.Result;
+import com.fystart.common.result.ResultCodeEnum;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -52,5 +54,16 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public Result error(GuiguException e) {
         return Result.fail().code(e.getCode()).message(e.getMsg());
+    }
+
+    /**
+     * spring security异常
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseBody
+    public Result error(AccessDeniedException e) throws AccessDeniedException {
+        return Result.build(null, ResultCodeEnum.PERMISSION);
     }
 }

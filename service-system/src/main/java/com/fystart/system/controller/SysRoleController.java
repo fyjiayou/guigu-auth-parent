@@ -11,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,6 +36,7 @@ public class SysRoleController {
         return Result.ok(roleList);
     }
 
+    @PreAuthorize("hasAuthority('bnt.sysRole.list')")
     @ApiOperation(httpMethod = "GET", value = "获取分页列表")
     @GetMapping("/{page}/{limit}")
     public Result index(@ApiParam(name = "page", value = "当前页码", required = true) @PathVariable Long page,
@@ -45,6 +47,7 @@ public class SysRoleController {
         return Result.ok(pageModel);
     }
 
+    @PreAuthorize("hasAuthority('bnt.sysRole.list')")
     @ApiOperation(value = "获取角色")
     @GetMapping("/findRoleById/{id}")
     public Result get(@PathVariable String id) {
@@ -59,6 +62,7 @@ public class SysRoleController {
      * @param role
      * @return
      */
+    @PreAuthorize("hasAuthority('bnt.sysRole.add')")
     @ApiOperation(value = "新增角色")
     @PostMapping("/save")
     public Result save(@RequestBody SysRole role) {
@@ -66,6 +70,7 @@ public class SysRoleController {
         return Result.ok();
     }
 
+    @PreAuthorize("hasAuthority('bnt.sysRole.update')")
     @ApiOperation(httpMethod = "PUT", value = "修改角色")
     @PutMapping("/update")
     public Result updateById(@RequestBody SysRole role) {
@@ -73,6 +78,7 @@ public class SysRoleController {
         return Result.ok();
     }
 
+    @PreAuthorize("hasAuthority('bnt.sysRole.remove')")
     @ApiOperation(httpMethod = "DELETE", value = "删除角色")
     @DeleteMapping("/remove/{id}")
     public Result remove(@PathVariable String id) {
@@ -88,6 +94,7 @@ public class SysRoleController {
      * @param idList
      * @return
      */
+    @PreAuthorize("hasAuthority('bnt.sysRole.remove')")
     @ApiOperation(httpMethod = "DELETE", value = "根据id列表删除")
     @DeleteMapping("/batchRemove")
     public Result batchRemove(@RequestBody List<Long> idList) {
@@ -102,6 +109,7 @@ public class SysRoleController {
         return Result.ok(map);
     }
 
+    @PreAuthorize("hasAuthority('bnt.sysUser.assignRole')")
     @ApiOperation(httpMethod = "POST",value = "给用户重新分配角色")
     @PostMapping("/doAssign")
     public Result doAssign(@RequestBody AssginRoleVo assginRoleVo){
